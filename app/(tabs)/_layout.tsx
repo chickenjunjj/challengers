@@ -6,13 +6,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return (
-    <FontAwesome
-      size={26}
-      style={{ paddingTop: 5, paddingBottom: 20, marginBottom: -5 }}
-      {...props}
-    />
-  );
+  return <FontAwesome size={24} {...props} />;
 }
 
 export default function TabLayout() {
@@ -21,7 +15,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: "#D1E472",
         headerShown: false,
-        tabBarLabelStyle: { fontSize: 16, paddingTop: 10 },
+        tabBarLabelStyle: { fontSize: 16, paddingTop: 5 },
       }}
     >
       <Tabs.Screen
