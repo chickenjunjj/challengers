@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet } from "react-native";
 import { Text } from "@/components/Themed";
 
-export default function TabOneScreen() {
+export default function Profile() {
   return (
     <SafeAreaView>
-      <Text>Search</Text>
+      <Text>Profile</Text>
     </SafeAreaView>
   );
 }
