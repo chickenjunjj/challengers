@@ -5,9 +5,10 @@ import {
   StyleSheet,
   View,
   TextInput,
-  TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { Text } from "@/components/Themed";
+import { router } from "expo-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,11 +18,14 @@ export default function Login() {
     <SafeAreaView style={styles.container}>
       <View style={styles.imageCont}>
         <Image
-          source={require("../../assets/images/signup.png")}
+          source={require("../assets/images/login.png")}
           style={styles.image}
         />
       </View>
-      <Text style={styles.welcomeMsg}>Welcome back!</Text>
+      <Text style={[styles.welcomeMsg, { color: "#57A147" }]}>
+        Ready to rally?
+      </Text>
+      <Text style={styles.welcomeMsg}>Sign up to meet your next match</Text>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -36,14 +40,14 @@ export default function Login() {
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
-      <TouchableOpacity style={styles.buttton}>
-        <Text style={styles.btnText}>Login</Text>
-      </TouchableOpacity>
+      <Pressable onPress={() => router.push("/(tabs)")} style={styles.buttton}>
+        <Text style={styles.btnText}>Sign up</Text>
+      </Pressable>
       <View style={styles.toRegister}>
         <Text>Don't have an account? </Text>
-        <TouchableOpacity>
-          <Text style={styles.register}>Sign up</Text>
-        </TouchableOpacity>
+        <Pressable onPress={() => router.push("/login")}>
+          <Text style={styles.register}>Login</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -57,7 +61,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 700,
     marginBottom: 20,
-    marginTop: 91.5,
     paddingRight: 20,
   },
   inputBox: {
