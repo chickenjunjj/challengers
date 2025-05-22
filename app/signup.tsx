@@ -44,7 +44,7 @@ export default function Login() {
         <Text style={styles.btnText}>Sign up</Text>
       </Pressable>
       <View style={styles.toRegister}>
-        <Text>Don't have an account? </Text>
+        <Text>Already have an account? </Text>
         <Pressable onPress={() => router.push("/login")}>
           <Text style={styles.register}>Login</Text>
         </Pressable>
