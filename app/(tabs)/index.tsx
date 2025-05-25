@@ -4,7 +4,7 @@ import { Text } from "@/components/Themed";
 export default function index() {
   return (
     <SafeAreaView>
-      <Text>Search</Text>
+      <Text style={{ color: "white" }}>Search</Text>
     </SafeAreaView>
   );
 }

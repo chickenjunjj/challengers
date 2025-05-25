@@ -1,16 +1,5 @@
 import { useState } from "react";
-import {
-  Image,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { Text } from "@/components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "@/components/PressableOpacity";
@@ -21,13 +10,6 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.imageCont}>
-            <Image
-              source={require("../assets/images/signup.png")}
-              style={styles.image}
-            />
-          </View>
-           */}
       <Text style={styles.welcomeMsg}>Welcome back!</Text>
       <TextInput
         value={email}
@@ -50,7 +32,7 @@ export default function Login() {
         <Text style={styles.btnText}>Login</Text>
       </PressableOpacity>
       <View style={styles.toRegister}>
-        <Text>Don't have an account? </Text>
+        <Text style={{ color: "white" }}>Don't have an account? </Text>
         <PressableOpacity onPress={() => router.replace("/signup")}>
           <Text style={styles.register}>Sign up</Text>
         </PressableOpacity>
@@ -64,6 +46,7 @@ const styles = StyleSheet.create({
   imageCont: { alignItems: "center" },
   image: { width: 300, height: 300 },
   welcomeMsg: {
+    color: "white",
     fontSize: 30,
     fontWeight: 700,
     marginBottom: 20,
@@ -73,9 +56,10 @@ const styles = StyleSheet.create({
   inputBox: {
     marginTop: 10,
     borderRadius: 10,
-    paddingVertical: 15,
+    paddingVertical: 13,
     paddingHorizontal: 10,
     marginBottom: 8,
+    fontSize: 18,
   },
   buttton: {
     marginTop: "auto",

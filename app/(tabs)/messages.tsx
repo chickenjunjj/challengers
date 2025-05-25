@@ -4,7 +4,7 @@ import { Text } from "@/components/Themed";
 export default function Messages() {
   return (
     <SafeAreaView>
-      <Text>Messages</Text>
+      <Text style={{ color: "white" }}>Messages</Text>
     </SafeAreaView>
   );
 }

@@ -1,18 +1,10 @@
 import { useState } from "react";
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  TextInput,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, StyleSheet, View, TextInput } from "react-native";
 import { Text } from "@/components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "@/components/PressableOpacity";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
@@ -43,7 +35,7 @@ export default function Login() {
         <Text style={styles.btnText}>Sign up</Text>
       </PressableOpacity>
       <View style={styles.toRegister}>
-        <Text>Already have an account? </Text>
+        <Text style={{ color: "white" }}>Already have an account? </Text>
         <PressableOpacity onPress={() => router.replace("/login")}>
           <Text style={styles.register}>Login</Text>
         </PressableOpacity>
@@ -57,6 +49,7 @@ const styles = StyleSheet.create({
   imageCont: { alignItems: "center" },
   image: { width: 300, height: 300 },
   welcomeMsg: {
+    color: "white",
     fontSize: 30,
     fontWeight: 700,
     marginBottom: 20,
@@ -65,9 +58,10 @@ const styles = StyleSheet.create({
   inputBox: {
     marginTop: 10,
     borderRadius: 10,
-    paddingVertical: 15,
+    paddingVertical: 13,
     paddingHorizontal: 10,
     marginBottom: 8,
+    fontSize: 18,
   },
   button: {
     marginTop: "auto",
