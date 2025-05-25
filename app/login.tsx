@@ -1,14 +1,19 @@
 import { useState } from "react";
 import {
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
   SafeAreaView,
   StyleSheet,
-  View,
   TextInput,
-  Pressable,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { router } from "expo-router";
+import PressableOpacity from "@/components/PressableOpacity";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,12 +21,13 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.imageCont}>
-        <Image
-          source={require("../assets/images/signup.png")}
-          style={styles.image}
-        />
-      </View>
+      {/* <View style={styles.imageCont}>
+            <Image
+              source={require("../assets/images/signup.png")}
+              style={styles.image}
+            />
+          </View>
+           */}
       <Text style={styles.welcomeMsg}>Welcome back!</Text>
       <TextInput
         value={email}
@@ -37,14 +43,17 @@ export default function Login() {
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
-      <Pressable onPress={() => router.push("/(tabs)")} style={styles.buttton}>
+      <PressableOpacity
+        onPress={() => router.replace("/(tabs)")}
+        style={styles.buttton}
+      >
         <Text style={styles.btnText}>Login</Text>
-      </Pressable>
+      </PressableOpacity>
       <View style={styles.toRegister}>
         <Text>Don't have an account? </Text>
-        <Pressable onPress={() => router.push("/signup")}>
+        <PressableOpacity onPress={() => router.replace("/signup")}>
           <Text style={styles.register}>Sign up</Text>
-        </Pressable>
+        </PressableOpacity>
       </View>
     </SafeAreaView>
   );

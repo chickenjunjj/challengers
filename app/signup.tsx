@@ -6,9 +6,11 @@ import {
   View,
   TextInput,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { router } from "expo-router";
+import PressableOpacity from "@/components/PressableOpacity";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,12 +18,6 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.imageCont}>
-        <Image
-          source={require("../assets/images/login.png")}
-          style={styles.image}
-        />
-      </View>
       <Text style={[styles.welcomeMsg, { color: "#57A147" }]}>
         Ready to rally?
       </Text>
@@ -40,14 +36,17 @@ export default function Login() {
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
-      <Pressable onPress={() => router.push("/(tabs)")} style={styles.buttton}>
+      <PressableOpacity
+        style={styles.button}
+        onPress={() => router.replace("/")}
+      >
         <Text style={styles.btnText}>Sign up</Text>
-      </Pressable>
+      </PressableOpacity>
       <View style={styles.toRegister}>
         <Text>Already have an account? </Text>
-        <Pressable onPress={() => router.push("/login")}>
+        <PressableOpacity onPress={() => router.replace("/login")}>
           <Text style={styles.register}>Login</Text>
-        </Pressable>
+        </PressableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 8,
   },
-  buttton: {
+  button: {
     marginTop: "auto",
     backgroundColor: "#57A147",
     borderRadius: 10,
