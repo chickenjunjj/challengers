@@ -1,13 +1,29 @@
 import { useState } from "react";
 import { SafeAreaView, StyleSheet, View, TextInput } from "react-native";
-import { Text } from "@/components/Themed";
+import { Text } from "../components/Themed";
 import { router } from "expo-router";
-import PressableOpacity from "@/components/PressableOpacity";
+import PressableOpacity from "../components/PressableOpacity";
+import { FIREBASE_AUTH } from "../lib/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
+  const signup = async () => {
+    setIsLoading(true);
+    setErrorMessage(false);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.replace("/");
+    } catch (error) {
+      setErrorMessage(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Text style={[styles.welcomeMsg, { color: "#57A147" }]}>
@@ -28,10 +44,8 @@ export default function Signup() {
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
-      <PressableOpacity
-        style={styles.button}
-        onPress={() => router.replace("/")}
-      >
+      {errorMessage && <Text style={styles.errorMes}>Invalid details</Text>}
+      <PressableOpacity style={styles.button} onPress={signup}>
         <Text style={styles.btnText}>Sign up</Text>
       </PressableOpacity>
       <View style={styles.toRegister}>
@@ -63,6 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 18,
   },
+  errorMes: { marginTop: 10, alignContent: "center", color: "#57A147" },
   button: {
     marginTop: "auto",
     backgroundColor: "#57A147",
