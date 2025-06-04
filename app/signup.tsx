@@ -3,8 +3,9 @@ import { SafeAreaView, StyleSheet, View, TextInput } from "react-native";
 import { Text } from "../components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "../components/PressableOpacity";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,16 @@ export default function Signup() {
     setIsLoading(true);
     setErrorMessage(false);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        createdAt: new Date(),
+      });
+
       router.replace("/");
     } catch (error) {
       setErrorMessage(true);
