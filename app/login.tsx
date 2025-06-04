@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { Text } from "../components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "../components/PressableOpacity";
-import { FIREBASE_AUTH } from "../lib/firebase";
+import { auth } from "../lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
@@ -11,7 +11,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
   const login = async () => {
     setIsLoading(true);
     setErrorMessage(false);
@@ -30,14 +29,14 @@ export default function Login() {
       <Text style={styles.welcomeMsg}>Welcome back!</Text>
       <TextInput
         value={email}
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={setEmail}
         placeholder="Email"
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
       <TextInput
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={setPassword}
         placeholder="Password"
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}

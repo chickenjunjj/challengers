@@ -13,10 +13,10 @@ const firebaseConfig = {
   measurementId: "G-C55NP0VZTF",
 };
 
-const FIREBASE_APP = initializeApp(firebaseConfig);
-const FIREBASE_DB = getFirestore(FIREBASE_APP);
-const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
 
-export { FIREBASE_DB, FIREBASE_AUTH, FIREBASE_APP };
+export { db, auth, app };

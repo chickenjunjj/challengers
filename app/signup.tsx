@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, View, TextInput } from "react-native";
 import { Text } from "../components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "../components/PressableOpacity";
-import { FIREBASE_AUTH } from "../lib/firebase";
+import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Signup() {
@@ -11,7 +11,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
   const signup = async () => {
     setIsLoading(true);
     setErrorMessage(false);
