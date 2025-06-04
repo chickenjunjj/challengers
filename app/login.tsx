@@ -1,13 +1,29 @@
 import { useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
-import { Text } from "@/components/Themed";
+import { Text } from "../components/Themed";
 import { router } from "expo-router";
-import PressableOpacity from "@/components/PressableOpacity";
+import PressableOpacity from "../components/PressableOpacity";
+import { auth } from "../lib/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const login = async () => {
+    setIsLoading(true);
+    setErrorMessage(false);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.replace("/");
+    } catch (error) {
+      setErrorMessage(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.welcomeMsg}>Welcome back!</Text>
@@ -25,10 +41,8 @@ export default function Login() {
         placeholderTextColor="#BBBBBB"
         style={[styles.inputBox, { backgroundColor: "#666666" }]}
       ></TextInput>
-      <PressableOpacity
-        onPress={() => router.replace("/(tabs)")}
-        style={styles.buttton}
-      >
+      {errorMessage && <Text style={styles.errorMes}>Invalid details</Text>}
+      <PressableOpacity onPress={login} style={styles.buttton}>
         <Text style={styles.btnText}>Login</Text>
       </PressableOpacity>
       <View style={styles.toRegister}>
@@ -61,6 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 18,
   },
+  errorMes: { marginTop: 10, alignContent: "center", color: "#57A147" },
   buttton: {
     marginTop: "auto",
     backgroundColor: "#57A147",

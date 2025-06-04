@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet } from "react-native";
-import { Text } from "@/components/Themed";
+import { Text } from "../../components/Themed";
 
 export default function index() {
   return (
