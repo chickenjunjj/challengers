@@ -25,8 +25,6 @@ export default function Signup() {
       await setDoc(doc(db, "users", user.uid), {
         createdAt: new Date(),
       });
-
-      router.replace("/");
     } catch (error) {
       setErrorMessage(true);
     } finally {

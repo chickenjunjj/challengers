@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { use, useContext, useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { Text } from "../components/Themed";
 import { router } from "expo-router";
 import PressableOpacity from "../components/PressableOpacity";
 import { auth } from "../lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { AuthContext } from "../util/authContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const authState = useContext(AuthContext);
   const login = async () => {
     setIsLoading(true);
     setErrorMessage(false);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.replace("/");
+      await authState.logIn;
+      console.log(authState.isLoggedIn);
     } catch (error) {
       setErrorMessage(true);
     } finally {
